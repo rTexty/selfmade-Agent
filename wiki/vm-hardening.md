@@ -29,8 +29,10 @@ Docs:
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
    ```terminal
-   ssh root@<vm-ip>
+   ssh root@<your-vm-ip-address>
    ```
+
+   Replace [`<your-vm-ip-address>`](./vm.md#your-vm-ip-address).
 
 2. To create a new user,
 
@@ -65,8 +67,10 @@ Docs:
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
    ```terminal
-   ssh <username>@<vm-ip>
+   ssh <username>@<your-vm-ip-address>
    ```
+
+   Replace [`<your-vm-ip-address>`](./vm.md#your-vm-ip-address).
 
 6. Disconnect from the root session and use the non-root user for all remaining steps.
 
@@ -229,8 +233,10 @@ After changing the [`SSH`](./ssh.md#what-is-ssh) config, restart the `SSH` servi
    [run in the `VS Code Terminal`](./vs-code.md#run-a-command-in-the-vs-code-terminal):
 
    ```terminal
-   ssh <username>@<vm-ip>
+   ssh <username>@<your-vm-ip-address>
    ```
+
+   Replace [`<your-vm-ip-address>`](./vm.md#your-vm-ip-address).
 
 > [!IMPORTANT]
 > Keep your current `SSH` session open until you confirm the new connection works. If the new connection fails, use the existing session to fix the config.
