@@ -9,7 +9,8 @@ Fix convention violations in a file using the report produced by `/review-file`.
 ## Steps
 
 1. Determine the file path and whether **single-fix mode** is active:
-   - If the user has selected text from a report file in the IDE (a file under `instructors/file-reviews/`), activate **single-fix mode**: record the selected finding text, and derive the target file path by stripping the `instructors/file-reviews/` prefix from the IDE file path (e.g., `instructors/file-reviews/lab/tasks/required/task-1.md` → `lab/tasks/required/task-1.md`). `$ARGUMENTS` is not required in this case.
+   - If the IDE selection's file path (which may be an absolute path) contains `instructors/file-reviews/`, activate **single-fix mode**. Derive the target file path by extracting the portion after `instructors/file-reviews/` (e.g., `.../instructors/file-reviews/lab/tasks/required/task-1.md` → `lab/tasks/required/task-1.md`). Record the selected text as the anchor to locate the finding in step 7. `$ARGUMENTS` is not required.
+   - If the IDE selection contains `**Suggested fix:**` (the selection may be just a few lines from a finding, or even only the suggested fix line), activate **single-fix mode** using the same file-path derivation above. The selected text is enough to locate the enclosing finding. `$ARGUMENTS` is not required.
    - Otherwise, parse `$ARGUMENTS` to get the file path. Accept:
      - Paths under `lab/tasks/` (e.g., `lab/tasks/setup.md`, `lab/tasks/required/task-2.md`)
      - Paths under `wiki/` (e.g., `wiki/web-development.md`)
@@ -32,7 +33,7 @@ Fix convention violations in a file using the report produced by `/review-file`.
      - [`contributing/conventions/conventions.md`](../../../contributing/conventions/conventions.md)
    - **For `AGENTS.md`:**
      - [`contributing/conventions/agents/agents.md`](../../../contributing/conventions/agents/agents.md)
-7. **If single-fix mode is active:** locate the selected finding in the report by matching its text. Apply only that one finding — follow the same rules as steps 8–11 below but scoped to that single item. Skip the finding (with a note) if it is Conceptual or a TODO. Then go directly to step 12.
+7. **If single-fix mode is active:** locate the enclosing finding in the report. Search for the anchor text; if the selection is only a sub-line (e.g., the `**Suggested fix:**` continuation), scan upward in the report to find the opening line of the numbered item (the `N. **[Severity]**…` line) that contains it. Apply the fix described in `**Suggested fix:**` — regardless of whether the finding is Conceptual or Convention. Skip only if the finding is a **TODO** (no content to supply), and note it in the summary. Then go directly to step 12.
 8. **Conceptual findings** cannot be auto-fixed — they require content decisions that only the author can make. List them all as skipped in the summary.
 9. Work through the report **Convention findings** one group at a time. For each violation, apply the minimal edit that resolves it. Use line numbers from the report as a starting guide, but always verify against the current file content (earlier fixes may shift lines).
 10. Work through the report **Empty sections**. For each empty section that has no `<!-- TODO ... -->` marker, add `<!-- TODO fill in this section -->` directly below the heading. Empty sections that already contain a `<!-- TODO ... -->` cannot be auto-fixed — skip them and note them in the summary.
