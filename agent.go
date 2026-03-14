@@ -63,7 +63,7 @@ func main() {
 		Answer:    answer,
 		ToolCalls: make([]interface{}, 0),
 	}
-	
+
 	jsonOut, err := json.Marshal(out)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error formatting JSON: %v\n", err)
