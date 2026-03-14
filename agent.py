@@ -1,3 +1,8 @@
+def read_file(path):
+    pass
+def list_files(path):
+    pass
+
 import sys
 import os
 import subprocess
